@@ -28,6 +28,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    const ADMIN_TYPE = 'admin';
+    const DEFAULT_TYPE = 'default';
+
+    public function isAdmin(){
+        return $this->type === self::ADMIN_TYPE;
+    }
+
     public function resumes(){
         return $this->hasOne('App\Resume');
     }
