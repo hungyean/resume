@@ -10,13 +10,12 @@
                 <div class="card-body">
                     <form action = "{{action('HomeController@updateUser',$user->id)}}" method = "post">
                     @csrf
-                    <input type='text' value='{{$user->id}}' name='uid'>
-                    <br/>
-                    <input type='text' value='{{$user->name}}' name= 'uname'>
-                    <br/>
-                    <input type='text' value='{{$user->email}}' name = 'uemail'>
-                    <br/>
-                    <input type='submit' value='Update'>
+
+                    <table>
+                        <tr><td>Name</td><td> <input type='text' value='{{$user->name}}' name= 'uname' style='width:350px'></td></tr>
+                        <tr><td>Email</td><td><input type='text' value='{{$user->email}}' name = 'uemail'  style='width:350px'></td></tr>
+                    </table>
+                    <input type='submit' value='Update' style='position:absolute; left:630px; top:150px;'>
                     </form>
                 </div>
             </div>

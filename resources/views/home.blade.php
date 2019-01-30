@@ -17,11 +17,13 @@
                         <tr><td>Edit Your Personal Information</td>
                             <td><a href = "editInfo/{{Auth::user()->id}}">Edit</td>
                         </tr>
-                        <tr><td>Add the resume information</td>
+                        <tr><td>Add The Resume Information</td>
                             <td><a href = "addResumeInfo/{{Auth::user()->id}}">Add</a></td>
                         </tr>
-                        <tr><td>Update the resume information</td>
+                        <tr><td>Update The Resume Information</td>
                             <td><a href = "updateResumeInfo/{{Auth::user()->id}}">Update</td></tr>
+                        <tr><td>View your resume information</td><td><a href ="viewResumeInfo/{{Auth::user()->id}}">View</a></td></tr>
+                        <tr><td>Resume Style Switcher</td><td><a href = "styleSwitcher/{{Auth::user()->id}}">Switch</td></tr>
                         <tr><td></td><td></td></tr>
                     </table>
                 </div>

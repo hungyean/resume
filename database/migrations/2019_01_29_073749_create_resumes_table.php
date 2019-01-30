@@ -28,6 +28,9 @@ class CreateResumesTable extends Migration
             $table->string('reference_name');
             $table->string('reference_email');
             $table->string('reference_phone');
+            $table->string('image');
+            $table->string('mime');
+            $table->string('ori_image');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
