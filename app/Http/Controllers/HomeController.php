@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 
 use Auth;
 use App\Resume;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -34,7 +35,7 @@ class HomeController extends Controller
     public function store(Request $request){
         $user = Auth::user();
         $resume = new Resume;
-        if ($user->resumes()->count() === 0) {
+        if ($user->resume()->count() === 0) {
             $imgcover = $request->file('img');
             $extension = $imgcover->getClientOriginalExtension();
             Storage::disk('public')->put($imgcover->getFilename() . '.' . $extension, File::get($imgcover));
@@ -53,7 +54,7 @@ class HomeController extends Controller
             $resume->mime = $imgcover->getClientMimeType();
             $resume->ori_image = $imgcover->getClientOriginalName();
             $resume->image = $imgcover->getFilename() . '.' . $extension;
-            $user->resumes()->save($resume);
+            $user->resume()->save($resume);
             echo "<script type='text/javascript'>
             alert('An information of your resume was added sucessfully');
             window.location.href = '".route('home')."';
@@ -71,7 +72,7 @@ class HomeController extends Controller
 
     public function updateResume(Request $request){
         $user = Auth::user();
-        $resume = $user->resumes;
+        $resume = $user->resume;
 
         if(empty($request->file('img'))){
 
@@ -148,6 +149,10 @@ class HomeController extends Controller
 
     }
 
+    public function viewProduct(){
+        $product = Product::all();
+        return view('users.viewProduct',['product'=>$product]);
+    }
     // public function admin(){
     //     return view('admin');
     // }

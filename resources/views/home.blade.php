@@ -24,6 +24,8 @@
                             <td><a href = "updateResumeInfo/{{Auth::user()->id}}">Update</td></tr>
                         <tr><td>View your resume information</td><td><a href ="viewResumeInfo/{{Auth::user()->id}}">View</a></td></tr>
                         <tr><td>Resume Style Switcher</td><td><a href = "styleSwitcher/{{Auth::user()->id}}">Switch</td></tr>
+                        <tr><td>View Available Products</td><td><a href="userViewProduct">View</a></td></tr>
+                        <tr><td>View Your Cart</td><td><a href="viewCart/{{Auth::user()->id}}">View</a></td></tr>
                         <tr><td></td><td></td></tr>
                     </table>
                 </div>

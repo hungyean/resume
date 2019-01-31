@@ -57,6 +57,11 @@ return [
             'visibility' => 'public',
         ],
 
+        'publics' =>[
+            'driver' => 'local',
+            'root' =>public_path().'/products',
+        ],
+
         // 'public_uploads' => [
         //     'driver' => 'local',
         //     'root' => public_path() . '/uploads',

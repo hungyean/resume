@@ -35,7 +35,11 @@ class User extends Authenticatable
         return $this->type === self::ADMIN_TYPE;
     }
 
-    public function resumes(){
+    public function resume(){
         return $this->hasOne('App\Resume');
+    }
+
+    public function product(){
+        return $this->belongsToMany(Product::class,'carts');
     }
 }

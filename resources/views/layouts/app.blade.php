@@ -32,9 +32,10 @@
             th, td {
             padding: 15px;
             }
-            input[type='file'] {
-             color: transparent;
-            }
+
+            input[type="file"]{
+            color: transparent;
+             }
             .hghltLightYellow { color: #000000; background-color: #FFFF99; font-style:oblique; }
             .hghltBrightYellow { color: #000000; background-color: #FFFF00; font-style:oblique; }
             .hghltLightBlue { color: #000000; background-color: #33FFFF; font-style:oblique; }
