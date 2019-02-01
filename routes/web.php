@@ -15,9 +15,20 @@ use App\Resume;
 use App\User;
 use App\Product;
 use App\Cart;
+use App\Payment;
 Auth::routes();
 Route::get('/', function () {
     return view('welcome');
+});
+
+// no need auth
+
+// required auth
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('viewInfo/{id}', function () {
+        $user = Auth::user();
+        return view('users.userInfo', ['user' => $user]);
+    });
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -26,10 +37,7 @@ Route::get('/admin', 'AdminController@admin')
     ->middleware('is_admin')
     ->name('admin');
 
-Route::get('viewInfo/{id}',function(){
-    $user = Auth::user();
-    return view('users.userInfo',['user' => $user]);
-});
+
 
 Route::get('viewResumeInfo/{id}',function(){
     $user = Auth::user();
@@ -119,11 +127,48 @@ Route::get('addCart/{id}',function($id){
 });
 
 Route::get('viewCart/{id}',function(){
+    DB::enableQueryLog();
     $user = Auth::user();
-    $carts= Cart::all();
+    $carts= Cart::with('product')->get();
     //$p = $cart->product->image;
     //$product = Product::all();
     return view('users.viewCart',['carts'=>$carts]);
+});
+
+Route::get('purchase/{id}',function($id){
+    //s$user = Auth::user();
+    $cart = Cart::find($id)->with('product');
+    return view('users.purchaseConfirmation',['cart' => $cart]);
+    // $qty = "<script>
+    // var quantity = prompt('Please Enter Quantity');
+    // document.write(quantity);
+    // </script>";
+    // $quantity = (int)$qty;
+    // echo $quantity;
+   //then need to use input value to php
+
+    // $quantity = $qty;
+
+    // $payment->quantity = $qty;
+    // $payment->tot_price = $payment->quantity * $cart->product->product_price;
+
+    // echo $quantity;
+    // $payment->save();
+    // echo "<script type='text/javascript'>
+    // alert('Purchased successfully');
+    // window.location.href = '".route('home')."';
+    // </script>";
+    // return view('users.purchaseProduct');
+});
+
+Route::get('viewPurchaseList/{id}',function(){
+    $payment = Payment::all();
+    // $carts = Cart::all();
+    return view('users.purchaseProductList',['payment'=>$payment]);
+});
+
+Route::get('viewPro',function(){
+    return view('users.viewProducts');
 });
 
 

@@ -26,6 +26,7 @@
                         <tr><td>Resume Style Switcher</td><td><a href = "styleSwitcher/{{Auth::user()->id}}">Switch</td></tr>
                         <tr><td>View Available Products</td><td><a href="userViewProduct">View</a></td></tr>
                         <tr><td>View Your Cart</td><td><a href="viewCart/{{Auth::user()->id}}">View</a></td></tr>
+                        <tr><td>View Your Purchase List</td><td><a href="viewPurchaseList/{{Auth::user()->id}}">View</a></td></tr>
                         <tr><td></td><td></td></tr>
                     </table>
                 </div>

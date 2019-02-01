@@ -11,4 +11,8 @@ class Cart extends Model
         return $this->belongsTo('App\Product');
     }
 
+    public function payment(){
+        return $this->hasOne('App\Payment');
+    }
+
 }

@@ -13,6 +13,7 @@
                         <th>Product id</th>
                         <th>Product Name</th>
                         <th>Product Image</th>
+                        <th>Product Price</th>
                         <th>Add To Cart</th>
                     </tr>
                     @foreach($product as $p)
@@ -20,6 +21,7 @@
                    <td>{{$p->id}}</td>
                    <td>{{$p->product_name}}</td>
                    <td><img src="{{url('products/'.$p->image)}}" alt="{{$p->image}}" width='130' height='180'></td>
+                   <td>RM {{$p->product_price}}</td>
                    <td><a href='addCart/{{$p->id}}'>Add</a></td>
                     </tr>
                    @endforeach

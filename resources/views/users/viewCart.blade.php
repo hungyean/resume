@@ -13,23 +13,27 @@
                         <th>Cart id</th>
                         <th>Product id</th>
                         <th>Image</th>
+                        <th>Price</th>
                         <th>Purchase</th>
                     </tr>
                     @foreach($carts as $c)
                     @if($c->user_id === Auth::user()->id)
                     <tr>
-                   <td>{{$c->id}}</td>
-                   <td>{{$c->product_id}}</td>
-                   {{--  <td>${{$c->product->image}}</td>  --}}
-                   <td><img src="../products/{{$c->product->image}}" width='130' height='180'></td>
-                   {{--  <td><img src="{{url('products/'.)}}" alt="{{$p->image}}" width='130' height='180'></td>  --}}
-                   {{--  <td><img src="{{url('products/'.)}}" alt="{{$c->product->image}}" width='130' height='180'></td>  --}}
-                   <td><a href='#'>Add</a></td>
+                    <td>{{$c->id}}</td>
+                    <td>{{$c->product_id}}</td>
+                    @if ($c->product)
+                    <td><img src="../products/{{$c->product->image}}" width='130' height='180'></td>
+                    <td>RM {{$c->product->product_price}}</td>
+                    @else
+                    <td>
+                        Oops, product deleted
+                    </td>
+                    @endif
+                   <td><a href='{{url('purchase',$c->id)}}'>Purchase</a></td>
                     </tr>
                     @endif
                    @endforeach
                 </table>
-
                 </div>
             </div>
         </div>

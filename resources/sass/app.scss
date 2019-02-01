@@ -12,3 +12,38 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+
+@mixin color($property) {
+    color: $property;
+}
+
+.box {
+    @include transform(rotate(30deg));
+}
+
+.abc {
+    @include transform(rotate(30deg));
+}
+
+.blue {
+    @include color($blue)
+}
+
+.red {
+    @include color(#f00);
+}
+
+.transparent {
+    @include color(rgba(0, 0, 0, 0))
+}
+
+.blue-and-transparent {
+    @extend .blue;
+    @extend .transparent;
+}
