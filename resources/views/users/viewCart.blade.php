@@ -21,14 +21,8 @@
                     <tr>
                     <td>{{$c->id}}</td>
                     <td>{{$c->product_id}}</td>
-                    @if ($c->product)
                     <td><img src="../products/{{$c->product->image}}" width='130' height='180'></td>
                     <td>RM {{$c->product->product_price}}</td>
-                    @else
-                    <td>
-                        Oops, product deleted
-                    </td>
-                    @endif
                    <td><a href='{{url('purchase',$c->id)}}'>Purchase</a></td>
                     </tr>
                     @endif

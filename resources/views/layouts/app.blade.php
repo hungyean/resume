@@ -17,7 +17,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> --}}
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    {{-- <link href="https://www.dvmtrucks.com/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{-- <link href="https://www.dvmtrucks.com/css/custom.css" rel="stylesheet"> --}}
+
     <style>
             table, td, th {
             border: 1px solid #ddd;
@@ -47,6 +51,51 @@
             .inline {display: inline; margin-left:0px; padding-left:0px; line-height:3em; }
             .inline li { display:inline; }
             .inline li a {padding: 0.5em 1em; border: 2px solid #000000; }
+
+            /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+            .flip-box {
+            background-color: transparent;
+            width: 150px;
+            height: 100%;
+            border: 1px solid #f1f1f1;
+            perspective: 1000px; /* Remove this if you don't want the 3D effect */
+            }
+
+            /* This container is needed to position the front and back side */
+            .flip-box-inner {
+            position: relative;
+            width: 150px;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            }
+
+            /* Do an horizontal flip when you move the mouse over the flip box container */
+            .flip-box:hover .flip-box-inner {
+            transform: rotateY(180deg);
+            }
+
+            /* Position the front and back side */
+            .flip-box-front, .flip-box-back {
+            position: absolute;
+            width: 150px;
+            height: 100%;
+            backface-visibility: hidden;
+            }
+
+            /* Style the front side (fallback if image is missing) */
+            .flip-box-front {
+            background-color: #bbb;
+            color: black;
+            }
+
+            /* Style the back side */
+            .flip-box-back {
+            background-color: dodgerblue;
+            color: white;
+            transform: rotateY(180deg);
+            }
     </style>
     <script type='text/javascript'>
     function changeColor(hghltColor)

@@ -16,6 +16,8 @@ use App\User;
 use App\Product;
 use App\Cart;
 use App\Payment;
+use Illuminate\Http\Request;
+
 Auth::routes();
 Route::get('/', function () {
     return view('welcome');
@@ -136,29 +138,24 @@ Route::get('viewCart/{id}',function(){
 });
 
 Route::get('purchase/{id}',function($id){
-    //s$user = Auth::user();
-    $cart = Cart::find($id)->with('product');
+    $user = Auth::user();
+    $cart = Cart::find($id);
     return view('users.purchaseConfirmation',['cart' => $cart]);
-    // $qty = "<script>
-    // var quantity = prompt('Please Enter Quantity');
-    // document.write(quantity);
-    // </script>";
-    // $quantity = (int)$qty;
-    // echo $quantity;
-   //then need to use input value to php
+});
 
-    // $quantity = $qty;
-
-    // $payment->quantity = $qty;
-    // $payment->tot_price = $payment->quantity * $cart->product->product_price;
-
-    // echo $quantity;
-    // $payment->save();
-    // echo "<script type='text/javascript'>
-    // alert('Purchased successfully');
-    // window.location.href = '".route('home')."';
-    // </script>";
-    // return view('users.purchaseProduct');
+Route::post('purchase/{id}',function(Request $request,$id){
+    $payment = New Payment;
+    $payment->cart_id = $request->input('cartId');
+    $payment->u_id = $request->input('userId');
+    $payment->p_id = $request->input('productId');
+    $payment->quantity = $request->input('qty');
+    $payment->tot_price = $request->input('price');
+    $payment->save();
+    echo "<script type='text/javascript'>
+    alert('Product was purchased successfully...');
+    window.location.href = '" . route('home') . "';
+    </script>
+    ";
 });
 
 Route::get('viewPurchaseList/{id}',function(){
@@ -168,7 +165,8 @@ Route::get('viewPurchaseList/{id}',function(){
 });
 
 Route::get('viewPro',function(){
-    return view('users.viewProducts');
+    $product = Product::all();
+    return view('users.viewProducts', ['product' => $product]);
 });
 
 

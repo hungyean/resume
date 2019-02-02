@@ -86,7 +86,7 @@
 
             <div class ="content">
                 <div class="title m-b-md">
-                    LiewResume asdasdsad
+                    LiewResume
                 </div>
                 <div class="links">
                 @auth
