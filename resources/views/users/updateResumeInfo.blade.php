@@ -1,47 +1,144 @@
 @extends('layouts.app')
-{{--  action = "{{action('HomeController@function',$user->id)}}"  --}}
-{{--  action = "{{action('HomeController@store',$user->id)}}"  --}}
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Hi, {{Auth::user()->name}}</div>
-
-                <div class="card-body">
-                    <form action = "{{action('HomeController@updateResume',$resume->id)}}" method = "post" enctype="multipart/form-data">
-                    @csrf
-                    <table>
-                        {{--  <input type='name' name='id' value='{{$resume->id}}'/>  --}}
-                        <input type='hidden' name='id' value='{{$resume->id}}'/>
-                        <input type='hidden' name='img' value='{{$resume->image}}'>
-                        <tr><td>Description</td><td><input type='text' name='description' value='{{$resume->description}}' style='width:350px'/></td></tr>
-                        <tr><td>Phone Number</td><td><input type='text' name='pnum' value='{{$resume->phone}}' style='width:350px'/></td></tr>
-                        <tr><td>Fax Number</td><td><input type='text' name='fnum' value='{{$resume->fax}}' style='width:350px'/></td></tr>
-
-                        <tr><td>Education Year</td><td><input type='text' name='eyear' value='{{$resume->education_year}}' style='width:350px'/></td></tr>
-                        <tr><td>Education Level</td><td><input type='text' name='elevel' value='{{$resume->education_level}}' style='width:350px'/></td></tr>
-
-                        <tr><td>Programming Skill</td><td><input type='text' name='pskill' value='{{$resume->programming_skill}}' style='width:350px'/></td></tr>
-                        <tr><td>Other Skill</td><td><input type='text' name='oskill' value='{{$resume->other_skill}}'style='width:350px'/></td></tr>
-
-                        <tr><td>Achievement Year</td><td><input type='text' name='ayear' value='{{$resume->achievement_year}}' style='width:350px' /></td></tr>
-                        <tr><td>Achievement</td><td><input type='text' name='aa' value='{{$resume->achievement}}' style='width:350px'/></td></tr>
-
-                        <tr><td>Reference Name</td><td><input type='text' name='rname' value='{{$resume->reference_name}}' style='width:350px'/></td></tr>
-                        <tr><td>Reference Email</td><td><input type='text' name='remail' value='{{$resume->reference_email}}' style='width:350px'/></td></tr>
-                        <tr><td>Reference Phone</td><td><input type='text' name='rphone' value='{{$resume->reference_phone}}' style='width:350px'/></td></tr>
-                        <tr><td>Image</td>
-                            <td><input type="file"  name="img"  class="hidden" value='{{$resume->image}}'/><label for="files" style="position:absolute; left:320px;">Select file</label></td>
-                        </tr>
+<div id="all">
+<div id="content">
+<div class="container" margin-top-10 no-padding>
+<div class="col-md-3">
 
 
-                    </table>
-                    <div style = "position:absolute; left:630px; top:800px;"><input type='submit' value='Submit'></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="panel panel-default sidebar-menu">
+<div class="panel-heading primary-bg" data-toggle="collapse" data-target="#sidebar">
+<h3 class="panel-title color-white">Hi, {{Auth::user()->name}}<i class="visible-xs fa fa-caret-down" style="float: right"></i></h3>
+<span class="visible-xs text-italic color-white">Search by status, brands, body types</span>
 </div>
+<div class="panel-body" no-padding>
+<div class="navbar-collapse collapse padding-top-10" id="sidebar" style="max-height: none; width: 100%;">
+<ul class="nav nav-pills nav-stacked category-menu">
+<li>
+<a href="#">PERSONAL INFORMATION</a>
+<ul>
+<li>
+<a class="" href="{{action('HomeController@viewBiodata',Auth::user()->id)}}">View Personal Information</a>
+</li>
+ <li>
+<a class="" href="{{action('HomeController@updateBiodata',Auth::user()->id)}}">Update Personal Information</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#">RESUME INFORMATION</a>
+<ul>
+<li>
+<a class="" href="{{action('HomeController@addResumeInfo',Auth::user()->id)}}">Add Resume Information</a>
+</li>
+<li>
+<a class="" href="{{action('HomeController@viewResumeInfo',Auth::user()->id)}}">View Resume Information</a>
+</li>
+<li>
+<a class="" href="{{action('HomeController@updateResumeInfo',Auth::user()->id)}}">Update Resume Information</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#">RESUME STYLE SWITCHER</a>
+<ul>
+<li>
+<a class="" href="{{action('HomeController@styleS',Auth::user()->id)}}">Switch Resume Style</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#">AVAILABLE RESUME BOOK</a>
+<ul>
+<li>
+<a class="" href="{{url('userViewProduct')}}">View Available Book</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#">SHOPPING CART</a>
+<ul>
+<li>
+<a class="" href="{{action('HomeController@viewCart',Auth::user()->id)}}">View Shopping Cart</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="#">LIST OF PURCHASE ITEM</a>
+<ul>
+<li>
+<a class="" href="{{action('HomeController@purchaseList',Auth::user()->id)}}">View Purchase List</a>
+</li>
+</ul>
+</li>
+
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-9">
+<div id="hot">
+<div class="box">
+<h2>UPDATE RESUME INFORMATION</h2>
+</div>
+<div class="login-form">
+    <form action="{{action('HomeController@updateResume',$resume->id)}}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type='hidden' name='id' value='{{$resume->id}}'/>
+    <input type='hidden' name='img' value='{{$resume->image}}'>
+        <h2 class="text-center">Update FORM</h2>       
+        <div class="form-group">
+        <input type='text' name='description' value='{{$resume->description}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='pnum' value='{{$resume->phone}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='fnum' value='{{$resume->fax}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='eyear' value='{{$resume->education_year}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='elevel' value='{{$resume->education_level}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='pskill' value='{{$resume->programming_skill}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='oskill' value='{{$resume->other_skill}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='ayear' value='{{$resume->achievement_year}}' class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='aa' value='{{$resume->achievement}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='rname' value='{{$resume->reference_name}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='remail' value='{{$resume->reference_email}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type='text' name='rphone' value='{{$resume->reference_phone}}'class="form-control">
+        </div>
+        <div class="form-group">
+        <input type="file"  name="img"  class="btn btn-primary btn-block" value='{{$resume->image}}'/>
+        </div>
+        <div class="form-group">
+        <input type='submit' value='Update' class="btn btn-primary btn-block">
+        </div>       
+    </form>
+    
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
 @endsection
+

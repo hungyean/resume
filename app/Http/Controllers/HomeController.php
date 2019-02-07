@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\File;
 use Auth;
 use App\Resume;
 use App\Product;
+use App\Cart;
+use App\Payment;
 
 class HomeController extends Controller
 {
@@ -156,4 +158,51 @@ class HomeController extends Controller
     // public function admin(){
     //     return view('admin');
     // }
+    
+    public function viewBiodata(){
+        $user = Auth::user();
+        return view('users.userInfo', ['user' => $user]);
+    }
+
+    public function updateBiodata(){
+        $user = Auth::user();
+        return view('users.editInfo',['user' => $user]);
+    }
+
+    public function addResumeInfo(){
+        $user = Auth::user();
+    return view('users.addResumeInfo', ['user' => $user]);
+    }
+
+    public function updateResumeInfo(){
+        $user = Auth::user();
+        $resume = $user->resume;
+        return view('users.updateResumeInfo',['resume' => $resume, 'user' => $user]);
+    }
+
+    public function viewResumeInfo(){
+        $user = Auth::user();
+        $resume = $user->resume;
+        return view('users.userResumeInfo',['user'=>$user,'resume'=>$resume]);
+    }
+
+    public function styleS(){
+        $user = Auth::user();
+        $resume = $user->resume;
+        return view('users.styleSwitcher', ['resume' => $resume, 'user' => $user]);
+    }
+
+    public function viewCart(){
+        $user = Auth::user();
+        $carts= Cart::with('product')->get();
+        //$p = $cart->product->image;
+        //$product = Product::all();
+        return view('users.viewCart',['carts'=>$carts]);
+    }
+
+    public function purchaseList(){
+        $payment = Payment::all();
+    // $carts = Cart::all();
+    return view('users.purchaseProductList',['payment'=>$payment]);
+    }
 }

@@ -27,11 +27,10 @@ Route::get('/', function () {
 
 // required auth
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('viewInfo/{id}', function () {
-        $user = Auth::user();
-        return view('users.userInfo', ['user' => $user]);
-    });
+    
 });
+
+Route::get('viewInfo/{id}', 'HomeController@viewBiodata');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -41,33 +40,15 @@ Route::get('/admin', 'AdminController@admin')
 
 
 
-Route::get('viewResumeInfo/{id}',function(){
-    $user = Auth::user();
-    $resume = $user->resume;
-    return view('users.userResumeInfo',['user'=>$user,'resume'=>$resume]);
-});
+Route::get('viewResumeInfo/{id}','HomeController@viewResumeInfo');
 
-Route::get('editInfo/{id}',function(){
-    $user = Auth::user();
-    return view('users.editInfo',['user' => $user]);
-});
+Route::get('editInfo/{id}','HomeController@updateBiodata');
 
-Route::get('addResumeInfo/{id}', function () {
-    $user = Auth::user();
-    return view('users.addResumeInfo', ['user' => $user]);
-});
+Route::get('addResumeInfo/{id}', 'HomeController@addResumeInfo');
 
-Route::get('updateResumeInfo/{id}',function(){
-    $user = Auth::user();
-    $resume = $user->resume;
-    return view('users.updateResumeInfo',['resume' => $resume, 'user' => $user]);
-});
+Route::get('updateResumeInfo/{id}','HomeController@updateResumeInfo');
 
-Route::get('styleSwitcher/{id}',function(){
-    $user = Auth::user();
-    $resume = $user->resume;
-    return view('users.styleSwitcher', ['resume' => $resume, 'user' => $user]);
-});
+Route::get('styleSwitcher/{id}','HomeController@styleS');
 
 Route::get('delete', function () {
     $product = Product::all();
@@ -128,14 +109,7 @@ Route::get('addCart/{id}',function($id){
 
 });
 
-Route::get('viewCart/{id}',function(){
-    DB::enableQueryLog();
-    $user = Auth::user();
-    $carts= Cart::with('product')->get();
-    //$p = $cart->product->image;
-    //$product = Product::all();
-    return view('users.viewCart',['carts'=>$carts]);
-});
+Route::get('viewCart/{id}','HomeController@viewCart');
 
 Route::get('purchase/{id}',function($id){
     $user = Auth::user();
@@ -158,11 +132,7 @@ Route::post('purchase/{id}',function(Request $request,$id){
     ";
 });
 
-Route::get('viewPurchaseList/{id}',function(){
-    $payment = Payment::all();
-    // $carts = Cart::all();
-    return view('users.purchaseProductList',['payment'=>$payment]);
-});
+Route::get('viewPurchaseList/{id}','HomeController@purchaseList');
 
 Route::get('viewPro',function(){
     $product = Product::all();

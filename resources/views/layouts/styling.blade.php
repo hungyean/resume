@@ -1,4 +1,4 @@
-<head>
+<!-- <head>
 
 <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
 
@@ -13,4 +13,4 @@
 
 <link rel="shortcut icon" href="https://www.dvmtrucks.com/img/favicon.png">
 
-</head>
+</head> -->
